@@ -1,0 +1,30 @@
+.OPTION EXPLICIT     ; Generate errors
+.Set CabinetNameTemplate=nmap.cab
+.Set DiskDirectoryTemplate=* 	; All cabinets in a single directory
+.Set Cabinet=on
+.Set Compress=On
+.Set MaxDiskSize=CDROM
+.Set MaxDiskFileCount=1000
+.Set DiskDirectory1=cab-output
+.Set FolderSizeThreshold=8000000
+3rd-party-licenses.txt
+libeay32.dll
+libssh2.dll
+nmap-mac-prefixes
+nmap-os-db
+nmap-payloads
+nmap-protocols
+nmap-rpc
+nmap-service-probes
+nmap-services
+nmap.exe
+nse_main.lua
+ssleay32.dll
+
+.Set DestinationDir=nselib
+nselib\lpeg-utility.lua
+nselib\stdnse.lua
+nselib\strict.lua
+
+.Set DestinationDir=scripts
+scripts\placeholder.txt

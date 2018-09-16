@@ -2,7 +2,6 @@ LICENSE
 -------
 lcab is under the GPL.
 
-
 COMPILE
 -------
 to compile you can do one of two things:
@@ -31,4 +30,4 @@ Ivan Brozovic <ivan.brozovic@ka.htnet.hr> : timestamp and attributes (especially
 Andreas Ropers (info@aropers.de): fixed the timestamp on Win32 platform, and fixed the build on Solaris 
 
 Enjoy,
-Rien (rien@geekshop.be)
+Rien (rien@croonenborghs.net)

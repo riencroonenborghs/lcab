@@ -26,6 +26,7 @@ struct sllitem *sllitem_init(struct sllitem *item, void *data)
 
 struct sllitem *nth(struct sllitem *item, int idx)
 {
+  if (idx < 0) return NULL;
   if (idx == 0) return item;
   if (item->next == NULL) return NULL;
   return nth(item->next, idx - 1);

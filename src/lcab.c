@@ -36,7 +36,7 @@ int write_temp_file(struct lcab_config *config);
 int cat_to_file(struct sllitem *items, FILE *fp);
 void cleanup(struct lcab_config *config);
 void cleanup_config(struct lcab_config *config);
-int remove_temp_file(struct lcab_config *config);
+int remove_temp_file();
 
 
 
@@ -225,7 +225,6 @@ int build_cab_file_meta(struct lcab_config *config, struct cmeta *meta)
 
 void lcab_defaults(struct lcab_config *config)
 {
-  if (strlen(config->temp_file) == 0) strcpy(config->temp_file, DEFAULT_TEMP_FILE);
   if (strlen(config->output_file) == 0) strcpy(config->output_file, DEFAULT_OUTPUT_CAB);
   if (strlen(config->output_dir) == 0) strcpy(config->output_dir, DEFAULT_OUTPUT_DIR);
 }
@@ -245,9 +244,9 @@ int write_cab_file(struct lcab_config *config)
   make_output_dir(config);
   write_temp_file(config);
 
-  fptmp = fopen(config->temp_file, "rb");
+  fptmp = fopen(DEFAULT_TEMP_FILE, "rb");
   if (!fptmp) {
-    error("error: could not open %s for writing", config->temp_file);
+    error("error: could not open %s for writing", DEFAULT_TEMP_FILE);
     return EXIT_FAILURE;
   }
 
@@ -257,7 +256,7 @@ int write_cab_file(struct lcab_config *config)
   fp = fopen(outputpath, "wb");
   if (!fp) {
     error("error: could not open %s for writing", config->output_file);
-    remove_temp_file(config);
+    remove_temp_file();
     return EXIT_FAILURE;
   }
   if (cheaderwrite(&meta.mycheader, fp)) {
@@ -289,7 +288,7 @@ int write_cab_file(struct lcab_config *config)
     error("error: could not write datablock at pos: %ld", pos);
     fclose(fptmp);
     fclose(fp);
-    remove_temp_file(config);
+    remove_temp_file();
   }
   while (ptrdbs->next != NULL) {
     ptrdbs = ptrdbs->next;
@@ -298,7 +297,7 @@ int write_cab_file(struct lcab_config *config)
       error("error: could not write datablock at pos: %ld", pos);
       fclose(fptmp);
       fclose(fp);
-      remove_temp_file(config);
+      remove_temp_file();
     }
   }
 
@@ -311,17 +310,17 @@ int write_cab_file(struct lcab_config *config)
 void cleanup(struct lcab_config *config)
 {
   // cleanup
-  remove_temp_file(config);
+  remove_temp_file();
   cleanup_config(config);
 }
 
-int remove_temp_file(struct lcab_config *config)
+int remove_temp_file()
 {
-  if (!exists(config->temp_file))
+  if (!exists(DEFAULT_TEMP_FILE))
     return 0;
-  int ret = remove(config->temp_file);
+  int ret = remove(DEFAULT_TEMP_FILE);
   if (ret) {
-    error("could not remove %s", config->temp_file);
+    error("could not remove %s", DEFAULT_TEMP_FILE);
     return ret;
   }
   return 0;
@@ -369,7 +368,7 @@ int write_temp_file(struct lcab_config *config)
 {
   // WRITE TEMP FILE
   errno = 0;
-  FILE *fptmp = fopen(config->temp_file, "wb");
+  FILE *fptmp = fopen(DEFAULT_TEMP_FILE, "wb");
   if (!fptmp) {
     error("error: could not open lcab.tmp for writing");
     return errno;

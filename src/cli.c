@@ -83,7 +83,6 @@ int main(int argc, char *argv[])
     .recursive      = 0,
     .diamond        = 0,
     .quiet          = 0,
-    .temp_file      = DEFAULT_TEMP_FILE,
     .output_file    = DEFAULT_OUTPUT_CAB,
     .output_dir     = DEFAULT_OUTPUT_DIR,
     .log_level      = INFO,

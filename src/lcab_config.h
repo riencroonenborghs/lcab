@@ -22,8 +22,6 @@ struct lcab_config {
   /* the path of the .dff file to process */
   char            diamond_file[FILENAME_MAX];
 
-  char            temp_file[FILENAME_MAX];
-
   /* the actual file entries to be added to the cab */
   struct sllitem *fileEntryItems;
 

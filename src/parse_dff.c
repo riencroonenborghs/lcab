@@ -32,6 +32,8 @@ int parse_dff(struct lcab_config *config, void add_input_file(struct lcab_config
   char dest_dir[FILENAME_MAX];
   char path[FILENAME_MAX];
 
+  memset(dest_dir, 0, FILENAME_MAX);
+
   trace("> parse_dff");
   fp = fopen(config->diamond_file, "r");
   if (!fp) {
@@ -49,7 +51,7 @@ int parse_dff(struct lcab_config *config, void add_input_file(struct lcab_config
     chomp(line);
 
     if ((char)line[0] != '.') {
-      if (strlen(dest_dir)) {
+      if (strlen(dest_dir) > 0) {
         strcpy(path, dest_dir);
         strcpy(path + strlen(path), "\\");
         strcpy(path + strlen(path),

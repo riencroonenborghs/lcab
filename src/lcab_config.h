@@ -9,13 +9,25 @@ struct lcab_config {
   int             diamond;
   int             quiet;
   int             dryrun;
+
+  /* see warn.h */
   int             log_level;
+
+  /* the name of the cab file to produce */
   char            outputfile[FILENAME_MAX];
+
+  /* into which directory should the cab file be created */
   char            output_dir[FILENAME_MAX];
-  char            output_path[FILENAME_MAX];
+
+  /* the path of the .dff file to process */
   char            diamond_file[FILENAME_MAX];
+
   char            temp_file[FILENAME_MAX];
+
+  /* the actual file entries to be added to the cab */
   struct sllitem *fileEntryItems;
+
+  /* the are coming from the command line */
   struct sllitem *rawFileItems;
 };
 

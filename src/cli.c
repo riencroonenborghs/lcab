@@ -15,6 +15,7 @@
  */
 #include <getopt.h>
 #include <errno.h>
+#include <sys/param.h>
 #include "cstruct.h"
 #include "cli.h"
 #include "parse_dff.h"
@@ -186,10 +187,9 @@ int main(int argc, char *argv[])
     }
   }
 
-  trace(">> set up the output_path");
-  strcpy(config.output_path, config.output_dir);
-  strcpy(config.output_path + strlen(config.output_path), "/");
-  strcpy(config.output_path + strlen(config.output_path), config.outputfile);
+  char output_path[MAXPATHLEN];
+
+  cab_output_path(&config, output_path);
 
 
   int ct = reduce(0, config.fileEntryItems, reducer_count);
@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
   debug("%-20s : %s", "quiet", yes_or_no(config.quiet));
   debug("%-20s : %s", "output directory", config.output_dir);
   debug("%-20s : %s", "output .cab", config.outputfile);
-  debug("%-20s : %s", "output path", config.output_path);
+  debug("%-20s : %s", "output path", output_path);
 
   debug("%-20s", "input files");
   for_each(config.fileEntryItems, print_entry_real_cab_path, "%20s := %-20s");
@@ -227,7 +227,7 @@ int main(int argc, char *argv[])
 
   cleanup(&config);
 
-  info("Created %s with %d files.", config.output_path, ct);
+  info("Created %s with %d files.", output_path, ct);
   return 0;
 }
 

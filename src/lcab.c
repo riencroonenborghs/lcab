@@ -14,8 +14,10 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 #include <errno.h>
+#include <sys/param.h>
 #include "mytypes.h"
 #include "func.h"
+#include "lcab.h"
 #include "lcab_config.h"
 #include "warn.h"
 #include "utils.h"
@@ -231,6 +233,7 @@ void lcab_defaults(struct lcab_config *config)
 int write_cab_file(struct lcab_config *config)
 {
   FILE *fp, *fptmp;
+  char outputpath[MAXPATHLEN];
   long pos = 0;
   struct cmeta meta;
   struct mydatablock *ptrdbs;
@@ -249,7 +252,9 @@ int write_cab_file(struct lcab_config *config)
   }
 
   // WRITE TO ACTUAL FILE
-  fp = fopen(config->outputfile, "wb");
+  // TODO - take output_dir into consideration
+  cab_output_path(config, outputpath);
+  fp = fopen(outputpath, "wb");
   if (!fp) {
     error("error: could not open %s for writing", config->outputfile);
     remove_temp_file(config);
@@ -374,4 +379,12 @@ int write_temp_file(struct lcab_config *config)
   }
   fclose(fptmp);
   return errno;
+}
+
+
+void cab_output_path(struct lcab_config *config, char *p)
+{
+  strcpy(p, config->output_dir);
+  strcpy(p + strlen(p), "/");
+  strcpy(p + strlen(p), config->outputfile);
 }

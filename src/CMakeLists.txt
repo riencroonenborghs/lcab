@@ -16,7 +16,6 @@ set(HEADERS ${CONFIG_HEADER}
   file_entry.h
   func.h)
 
-add_executable(lcab ${HEADERS} cli.c)
 
 add_library(cab STATIC
   cli.c
@@ -27,14 +26,17 @@ add_library(cab STATIC
   cheader.c
   checksum.c
   cwrite.c
-  utils.c
-  parse_dff.c)
+  utils.c)
+
 add_library(func STATIC ${HEADERS} func.c)
 add_library(warn STATIC ${HEADERS} warn.c)
-target_link_libraries(lcab cab)
+add_library(parse_dff STATIC ${HEADERS} parse_dff.c)
+
 target_link_libraries(cab func warn)
 target_link_libraries(func warn)
 
+add_executable(lcab ${HEADERS} cli.c)
+target_link_libraries(lcab cab parse_dff)
 
 install(TARGETS lcab RUNTIME DESTINATION bin)
 # LIBRARY DESTINATION lib

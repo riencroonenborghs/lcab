@@ -19,11 +19,25 @@ endfunction()
 add_my_test(func check_func.c)
 add_my_test(warn check_warn.c)
 
+
 # manual test addition since the pattern is slightly different
 # than the macro above.
 add_executable(check_lcab check_lcab.c util.c util.h)
 target_link_libraries(check_lcab cab ${CHECK_LIBRARIES})
 add_test(NAME lcab COMMAND check_lcab)
-configure_file(testcab.cab testcab.cab COPYONLY)
-set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "testcab" "out.cab")
 
+
+add_executable(check_parse_dff check_parse_dff.c util.c util.h)
+target_link_libraries(check_parse_dff parse_dff cab ${CHECK_LIBRARIES})
+add_test(NAME parse_dff COMMAND check_parse_dff)
+
+
+# copy test.dff to the output directory so the
+# tests can use it.
+configure_file(test.dff test.dff COPYONLY)
+configure_file(testcab.cab testcab.cab COPYONLY)
+
+
+
+# add additonal files for cleaning
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES "test.dff" "testcab" "out.cab")

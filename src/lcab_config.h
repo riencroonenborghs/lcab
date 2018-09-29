@@ -14,7 +14,7 @@ struct lcab_config {
   int             log_level;
 
   /* the name of the cab file to produce */
-  char            outputfile[FILENAME_MAX];
+  char            output_file[FILENAME_MAX];
 
   /* into which directory should the cab file be created */
   char            output_dir[FILENAME_MAX];

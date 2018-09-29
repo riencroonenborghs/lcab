@@ -74,8 +74,8 @@ int parse_dff(struct lcab_config *config, void add_input_file(struct lcab_config
         strcpy(config->output_dir, setting_value);
         trace(">> set output dir to %s", config->output_dir);
       } else if (strcmp(setting, "CabinetNameTemplate") == 0) {
-        strcpy(config->outputfile, setting_value);
-        trace(">> set output file to %s", config->outputfile);
+        strcpy(config->output_file, setting_value);
+        trace(">> set output file to %s", config->output_file);
       } else if (strcmp(setting, "DestinationDir") == 0) {
         memset(dest_dir, 0, FILENAME_MAX);
         strcpy(dest_dir, setting_value);

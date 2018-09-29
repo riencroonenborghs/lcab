@@ -226,7 +226,7 @@ int build_cab_file_meta(struct lcab_config *config, struct cmeta *meta)
 void lcab_defaults(struct lcab_config *config)
 {
   if (strlen(config->temp_file) == 0) strcpy(config->temp_file, DEFAULT_TEMP_FILE);
-  if (strlen(config->outputfile) == 0) strcpy(config->outputfile, DEFAULT_OUTPUT_CAB);
+  if (strlen(config->output_file) == 0) strcpy(config->output_file, DEFAULT_OUTPUT_CAB);
   if (strlen(config->output_dir) == 0) strcpy(config->output_dir, DEFAULT_OUTPUT_DIR);
 }
 
@@ -256,7 +256,7 @@ int write_cab_file(struct lcab_config *config)
   cab_output_path(config, outputpath);
   fp = fopen(outputpath, "wb");
   if (!fp) {
-    error("error: could not open %s for writing", config->outputfile);
+    error("error: could not open %s for writing", config->output_file);
     remove_temp_file(config);
     return EXIT_FAILURE;
   }
@@ -386,5 +386,5 @@ void cab_output_path(struct lcab_config *config, char *p)
 {
   strcpy(p, config->output_dir);
   strcpy(p + strlen(p), "/");
-  strcpy(p + strlen(p), config->outputfile);
+  strcpy(p + strlen(p), config->output_file);
 }

@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
     .diamond        = 0,
     .quiet          = 0,
     .temp_file      = DEFAULT_TEMP_FILE,
-    .outputfile     = DEFAULT_OUTPUT_CAB,
+    .output_file    = DEFAULT_OUTPUT_CAB,
     .output_dir     = DEFAULT_OUTPUT_DIR,
     .log_level      = INFO,
     .fileEntryItems = NULL,
@@ -169,7 +169,7 @@ int main(int argc, char *argv[])
 
   if (optind < argc)
     // peel off the last value
-    strcpy(config.outputfile, argv[optind]);
+    strcpy(config.output_file, argv[optind]);
   // end processing raw args
 
 
@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
   debug("%-20s : %s", "recursive", yes_or_no(config.recursive));
   debug("%-20s : %s", "quiet", yes_or_no(config.quiet));
   debug("%-20s : %s", "output directory", config.output_dir);
-  debug("%-20s : %s", "output .cab", config.outputfile);
+  debug("%-20s : %s", "output .cab", config.output_file);
   debug("%-20s : %s", "output path", output_path);
 
   debug("%-20s", "input files");

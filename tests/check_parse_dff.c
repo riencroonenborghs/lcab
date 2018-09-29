@@ -48,7 +48,7 @@ void teardown()
 }
 
 START_TEST(test_supports_cab_name){
-  ck_assert_str_eq(config->outputfile, "testdff.cab");
+  ck_assert_str_eq(config->output_file, "testdff.cab");
 }
 END_TEST
 

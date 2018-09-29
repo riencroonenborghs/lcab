@@ -58,11 +58,6 @@ START_TEST(test_supports_dest_dir)
 }
 END_TEST
 
-START_TEST(test_supports_disk_dir)
-{
-}
-END_TEST
-
 START_TEST(test_reads_files)
 {
   struct sllitem *item;
@@ -95,7 +90,6 @@ Suite *make_suite(void)
   tcase_add_checked_fixture(tc, setup, teardown);
   suite_add_tcase(s, tc);
   tcase_add_test(tc, test_supports_cab_name);
-  tcase_add_test(tc, test_supports_disk_dir);
   tcase_add_test(tc, test_supports_dest_dir);
   tcase_add_test(tc, test_reads_files);
   return s;

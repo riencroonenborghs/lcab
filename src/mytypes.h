@@ -49,8 +49,4 @@ typedef unsigned long int CHECKSUM;
 #define CFI_START               (0x2C)          /* file offset */
 
 
-typedef int bool;
-#define true 1
-#define false 0
-
 #endif
